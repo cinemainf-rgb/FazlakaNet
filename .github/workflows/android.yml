@@ -6,27 +6,24 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
 
-    - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y zip unzip openjdk-17-jdk python3-pip
+          pip3 install --upgrade pip
+          pip3 install buildozer
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
+      - name: Build APK
+        run: |
+          echo "APK BUILD STARTED"
 
-    - name: Install Buildozer
-      run: |
-        sudo apt update
-        sudo apt install -y zip unzip openjdk-17-jdk
-        python -m pip install --upgrade pip
-        pip install buildozer
-
-    - name: Show Files
-      run: ls -la
-
-    - name: Finished
-      run: echo "Workflow OK"
+      - name: Upload Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-files
+          path: .
