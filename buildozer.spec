@@ -1,35 +1,54 @@
-[app]
+name: Build APK
 
-title = Fazlaka Net
+on:
+  workflow_dispatch:
+  push:
 
-package.name = fazlakanet
+jobs:
 
-package.domain = com.fazlaka
+  build:
 
-source.dir = .
+    runs-on: ubuntu-22.04
 
-source.include_exts = py,png,jpg,json
+    steps:
 
-version = 1.0
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-requirements = python3,kivy,pyjnius
+      - name: Install Dependencies
+        run: |
+          sudo apt update
 
-orientation = portrait
+          sudo apt install -y \
+          git \
+          zip \
+          unzip \
+          openjdk-17-jdk \
+          python3-pip \
+          autoconf \
+          automake \
+          libtool \
+          pkg-config \
+          zlib1g-dev \
+          libncurses5-dev \
+          libffi-dev \
+          libssl-dev \
+          cmake
 
-fullscreen = 0
+          python3 -m pip install --upgrade pip
+          pip3 install buildozer cython
 
-android.api = 31
+      - name: Accept Android Licenses
+        run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
 
-android.minapi = 21
+      - name: Build APK
+        run: |
+          buildozer android debug
 
-android.archs = arm64-v8a
-
-android.permissions = INTERNET
-
-android.permissions = BLUETOOTH
-
-android.permissions = BLUETOOTH_ADMIN
-
-android.permissions = BLUETOOTH_CONNECT
-
-android.permissions = BLUETOOTH_SCAN
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK
+          path: bin/*.apk
