@@ -8,7 +8,7 @@ package.domain = com.fazlaka
 
 source.dir = .
 
-source.include_exts = py,png,jpg,kv
+source.include_exts = py,png,jpg,json
 
 version = 1.0
 
@@ -22,6 +22,14 @@ android.api = 31
 
 android.minapi = 21
 
-android.permissions = INTERNET,BLUETOOTH,BLUETOOTH_ADMIN,BLUETOOTH_CONNECT,BLUETOOTH_SCAN
-
 android.archs = arm64-v8a
+
+android.permissions = INTERNET
+
+android.permissions = BLUETOOTH
+
+android.permissions = BLUETOOTH_ADMIN
+
+android.permissions = BLUETOOTH_CONNECT
+
+android.permissions = BLUETOOTH_SCAN
