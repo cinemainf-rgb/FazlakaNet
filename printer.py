@@ -1,17 +1,22 @@
-class BluetoothPrinter:
+def print_card(
+    code,
+    profile
+):
 
-    def print_card(
-        self,
-        code,
-        profile
-    ):
+    receipt = f"""
+====================
 
-        print(
-            f"Code: {code}"
-        )
+FAZLAKA NET
 
-        print(
-            f"Profile: {profile}"
-        )
+PROFILE
 
-        return True
+{profile}
+
+CODE
+
+{code}
+
+====================
+"""
+
+    print(receipt)
