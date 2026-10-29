@@ -12,16 +12,11 @@ class Database:
         self.cur = self.conn.cursor()
 
         self.cur.execute("""
-        CREATE TABLE IF NOT EXISTS sales (
-
+        CREATE TABLE IF NOT EXISTS sales(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
             code TEXT,
-
             profile TEXT,
-
             sale_date DATETIME DEFAULT CURRENT_TIMESTAMP
-
         )
         """)
 
@@ -33,26 +28,28 @@ class Database:
         profile
     ):
 
-        self.cur.execute("""
-        INSERT INTO sales
-        (
-        code,
-        profile
+        self.cur.execute(
+            '''
+            INSERT INTO sales
+            (
+            code,
+            profile
+            )
+            VALUES
+            (
+            ?,
+            ?
+            )
+            ''',
+            (
+                code,
+                profile
+            )
         )
-        VALUES
-        (
-        ?,
-        ?
-        )
-        """,
-        (
-        code,
-        profile
-        ))
 
         self.conn.commit()
 
-    def get_total_cards(self):
+    def get_total_sales(self):
 
         self.cur.execute(
             "SELECT COUNT(*) FROM sales"
@@ -60,18 +57,15 @@ class Database:
 
         return self.cur.fetchone()[0]
 
-    def get_last_card(self):
+    def get_last_sale(self):
 
-        self.cur.execute("""
-        SELECT code
-        FROM sales
-        ORDER BY id DESC
-        LIMIT 1
-        """)
+        self.cur.execute(
+            """
+            SELECT code
+            FROM sales
+            ORDER BY id DESC
+            LIMIT 1
+            """
+        )
 
-        r = self.cur.fetchone()
-
-        if r:
-            return r[0]
-
-        return "-"
+        return self.cur.fetchone()
