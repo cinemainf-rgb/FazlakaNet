@@ -52,3 +52,4 @@ jobs:
         with:
           name: APK
           path: bin/*.apk
+          
