@@ -24,12 +24,5 @@ android.minapi = 21
 
 android.archs = arm64-v8a
 
-android.permissions = INTERNET
+android.permissions = INTERNET,BLUETOOTH,BLUETOOTH_ADMIN,BLUETOOTH_CONNECT,BLUETOOTH_SCAN
 
-android.permissions = BLUETOOTH
-
-android.permissions = BLUETOOTH_ADMIN
-
-android.permissions = BLUETOOTH_CONNECT
-
-android.permissions = BLUETOOTH_SCAN
