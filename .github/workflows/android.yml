@@ -27,4 +27,7 @@ jobs:
         with:
           name: project-files
           path: .
-          
+          - name: Accept Android Licenses
+  run: |
+    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+    
