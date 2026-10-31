@@ -19,12 +19,9 @@ orientation = portrait
 fullscreen = 0
 
 android.api = 30
-android.sdk = 30
 
-
-android.minapi = 23
+android.minapi = 21
 
 android.archs = arm64-v8a
 
-android.permissions = INTERNET,BLUETOOTH,BLUETOOTH_ADMIN,BLUETOOTH_CONNECT,BLUETOOTH_SCAN
-
+android.permissions = INTERNET,BLUETOOTH,BLUETOOTH_ADMIN
